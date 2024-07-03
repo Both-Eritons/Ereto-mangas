@@ -1,0 +1,21 @@
+{
+    "name": "eriton/ereto-mangas",
+    "description": "API Ereto-Mangas",
+    "type": "project",
+    "require": {
+        "marrios/mareaturborouter": "dev-master",
+        "symfony/dotenv": "7.2.x-dev"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Ereto\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "eriton"
+        }
+    ],
+    "minimum-stability": "dev"
+}
