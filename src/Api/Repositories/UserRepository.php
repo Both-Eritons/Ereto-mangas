@@ -49,4 +49,21 @@ class UserRepository{
 
     return null;
   }
+  function findUserByUsername($username) {
+    $query = "SELECT * FROM ".$this->table." WHERE username = :username";
+    $stmt = $this->sql->prepare($query);
+    $stmt->bindParam(":username", $username);
+    $stmt->execute();
+
+    $row = $stmt->fetch();
+    
+    if($row) {
+
+      return new UserModel($row["id"], $row["username"], $row["logo"], $row["password"]);
+
+    }
+
+    return null;
+  }
+
 }
