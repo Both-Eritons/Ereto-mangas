@@ -4,11 +4,8 @@ namespace Ereto\Api\Models;
 
 class UserModel {
 
-  private int $id, $username, $logo, $password;
-  function __construct(int $id = null, 
-    string $user, 
-    string $logo, 
-    string $pass) {
+  private $id, $username, $logo, $password;
+  function __construct($id = null, $user, $logo, $pass) {
 
     $this->id = $id;
     $this->username = $user;
@@ -17,19 +14,19 @@ class UserModel {
 
   }
 
-  function getUserId(): int {
+  function getUserId() {
     return $this->id;
   }
 
-  function getUsername(): string {
+  function getUsername() {
     return $this->username;
   }
 
-  function getLogo(): string {
+  function getLogo() {
     return $this->logo;
   }
 
-  function getPassword(): string {
+  function getPassword() {
     return $this->password;
   }
 }

@@ -10,13 +10,13 @@ class Mysql {
 
   static function conn(): PDO {
     if(self::$sql == null) {
-
+      
       self::$sql = new PDO(Env::getEnv("DATABASE")["DATABASE_CON"],
         Env::getEnv("DATABASE")["USER"],
-        Env::getEnv("DATABASE")["DATABASE"]["PASSWORD"], [
+        Env::getEnv("DATABASE")["PASSWORD"], [
+          PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ]
-      );
+        ]);
 
     }
 

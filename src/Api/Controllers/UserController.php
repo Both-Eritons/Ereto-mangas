@@ -2,14 +2,27 @@
 
 namespace Ereto\Api\Controllers;
 
-use Ereto\FileManagements\MangaManagement;
+use Ereto\Api\Repositories\UserRepository;
+use Ereto\Api\Services\UserService;
 use MareaTurbo\Route;
-use Ereto\Configs\EnvironmentVariables as Vars;
+use MareaTurbo\Request;
 
 class UserController{
 
-  #[Route("/test","GET", "route.name")]
-  function test($request) {
-    //$mangaM = new MangaManagement("_cdn/public");
+  private $user;
+  function __construct() {
+
+
+    $this->user = new UserService(
+      new UserRepository()
+    );
+
+
+  }
+
+  #[Route("/user/{id}","GET", "route.name")]
+  function FindUser(Request $request) {
+    $id = $request->only(["id"])["id"];
+     $this->user->UserExist($id); 
   }
 }
