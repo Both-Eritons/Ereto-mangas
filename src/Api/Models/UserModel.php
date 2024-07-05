@@ -5,7 +5,7 @@ namespace Ereto\Api\Models;
 class UserModel {
 
   private $id, $username, $logo, $password;
-  function __construct($id = null, $user, $logo, $pass) {
+  function __construct($id = null, $user, $logo = null, $pass) {
 
     $this->id = $id;
     $this->username = $user;
