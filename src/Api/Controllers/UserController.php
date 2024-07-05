@@ -20,7 +20,12 @@ class UserController{
 
   }
 
-  #[Route("/user/{id}","GET", "route.name")]
+  #[Route("/api/user/register", "POST", "route.createUser")]
+  function createUser(Request $request) {
+    print_r($_GET);
+  }
+
+  #[Route("/api/user/{id}","GET", "route.findUser")]
   function FindUser(Request $request) {
     $id = $request->only(["id"])["id"];
      $this->user->UserExist($id); 
