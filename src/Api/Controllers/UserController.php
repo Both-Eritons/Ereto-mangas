@@ -22,7 +22,9 @@ class UserController{
 
   #[Route("/api/user/register", "POST", "route.createUser")]
   function createUser(Request $request) {
-    print_r($_GET);
+    $json = json_decode(file_get_contents("php://input"));
+    print_r($json);
+    //$this->user->createUser($json["username"],$json["password"]);
   }
 
   #[Route("/api/user/{id}","GET", "route.findUser")]
