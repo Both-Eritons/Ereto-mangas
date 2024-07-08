@@ -40,7 +40,7 @@ class MangaRepository{
     $row = $stmt->fetch();
 
     if($row) {
-      return new MangaModel($row["id"], $row["title"], $row["logo"], $row["aurhor"]);
+      return new MangaModel($row["id"], $row["title"], $row["logo"], $row["author"]);
     }
 
     return null;
