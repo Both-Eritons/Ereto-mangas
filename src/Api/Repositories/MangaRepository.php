@@ -32,7 +32,7 @@ class MangaRepository{
   }
 
   function findManga($id) {
-    $query = "SELECT * FROM ".$this->table."WHERE id = :id";
+    $query = "SELECT * FROM ".$this->table." WHERE id = :id";
     $stmt = $this->sql->prepare($query);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
@@ -46,4 +46,21 @@ class MangaRepository{
     return null;
 
   }
+
+  function findMangaByTitle($title) {
+    $query = "SELECT * FROM ".$this->table." WHERE title = :title";
+    $stmt = $this->sql->prepare($query);
+    $stmt->bindParam(":title", $title);
+    $stmt->execute();
+
+    $row = $stmt->fetch();
+
+    if($row) {
+      return new MangaModel($row["id"], $row["title"], $row["logo"], $row["author"]);
+    }
+
+    return null;
+
+  }
+
 }
