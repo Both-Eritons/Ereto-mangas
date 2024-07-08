@@ -15,13 +15,14 @@ class UserRepository{
 
   function createUser(UserModel $user) {
 
-    $query = "INSERT INTO".$this->table."(username, password) VALUES(:username, :password)";
+    $query = "INSERT INTO ".$this->table."(username, password) VALUES(:username, :password)";
 
-    
+    $username = $user->getUsername();
+    $password = $user->getPassword();
 
     $stmt = $this->sql->prepare($query);
-    $stmt->bindParam(":username", $user->getUsername());
-    $stmt->bindParam(":password", $user->getPassword());
+    $stmt->bindParam(":username", $username);
+    $stmt->bindParam(":password", $password);
     $stmt->execute();
 
     $row = $stmt->fetch();

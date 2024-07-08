@@ -20,6 +20,17 @@ class UserService {
       return HttpJson::Json("usuario ja existe!", 303);
     }
 
+    if(strlen($username) < 4 || strlen($username) > 10) {
+
+      return HttpJson::Json("usuario precisa ter entre 4-10!", 400);
+
+    }
+    if(strlen($password) < 4 || strlen($password) > 10) {
+
+      return HttpJson::Json("senha precisa ter entre 4-10!", 400);
+
+    }
+
     $userM = new UserModel(null, $username, null, $password);
 
     $user = $this->userRepo->createUser($userM);
