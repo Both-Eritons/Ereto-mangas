@@ -4,7 +4,6 @@ namespace Ereto\Api\Services;
 
 use Ereto\Api\Models\UserModel;
 use Ereto\Api\Repositories\UserRepository;
-use Ereto\Utils\HttpJson;
 use Exception;
 
 class UserService {
