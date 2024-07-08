@@ -7,7 +7,7 @@ use Ereto\Connections\Mysql;
 
 class MangaRepository{
 
-  private $table = "users", $sql;
+  private $table = "mangas", $sql;
   function __construct() {
     $this->sql = Mysql::conn();
   }
@@ -24,7 +24,23 @@ class MangaRepository{
     $row = $stmt->fetch();
 
     if($row) {
-      return new MangaModel(null, $title);
+      return new MangaModel($row["id"], $row["title"], $row["logo"], $row["aurhor"]);
+    }
+
+    return null;
+
+  }
+
+  function findManga($id) {
+    $query = "SELECT * FROM ".$this->table."WHERE id = :id";
+    $stmt = $this->sql->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+
+    $row = $stmt->fetch();
+
+    if($row) {
+      return new MangaModel($row["id"], $row["title"], $row["logo"], $row["aurhor"]);
     }
 
     return null;
