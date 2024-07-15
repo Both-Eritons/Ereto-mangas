@@ -34,7 +34,7 @@ class UserRepository{
     return null;
   }
 
-  function findUser($id) {
+  function findUser(int $id) {
     $query = "SELECT * FROM ".$this->table." WHERE id = :id";
     $stmt = $this->sql->prepare($query);
     $stmt->bindParam(":id", $id);

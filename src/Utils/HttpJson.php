@@ -3,11 +3,14 @@
 namespace Ereto\Utils;
 
 use DateTime;
+use Psr\Http\Message\ResponseInterface as Response;
 
-class HttpJson {
+class HttpJson
+{
 
-  static function Json(string $msg = "", int $http, $more = null) {
-    http_response_code($http);
+  static function Json(Response $res, string $msg = "", int $http, $more = null): Response
+  {
+
     $date = new DateTime();
     $arr = array(
       "message" => $msg,
@@ -16,6 +19,9 @@ class HttpJson {
       "more" => $more
     );
 
-    return print(json_encode($arr, JSON_PRETTY_PRINT));
+    $payload = json_encode($arr);
+    $res->withStatus($http)->getBody()->write($payload);
+
+    return $res->withHeader("Content-type", "application/json");
   }
 }

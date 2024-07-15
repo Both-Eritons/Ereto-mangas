@@ -7,45 +7,51 @@ use Ereto\Api\Services\MangaService;
 use Ereto\Constants\MangaConstant as MC;
 use Ereto\Utils\HttpJson;
 use Exception;
-use MareaTurbo\Request;
-use MareaTurbo\Route;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 
-class MangaController {
+class MangaController
+{
 
   private $manga;
-  function __construct() {
+  function __construct()
+  {
     $this->manga = new MangaService(
       new MangaRepository()
     );
   }
 
-  #[Route("/api/manga/create/{title}", "POST", "manga.create")]
-  function createManga(Request $req) {
-    $title = $req->only(["title"])["title"];
+  function createManga(Request $req, Response $res)
+  {
+    $title = $req->getQueryParams()["title"];
 
-    try{
+    try {
+
       $this->manga->createManga($title);
-      return HttpJson::Json(MC::$msg["CREATED"], 200);
-    } catch(Exception $e) {
-      return HttpJson::Json($e->getMessage(), $e->getCode());
+      return HttpJson::Json($res, MC::$msg["CREATED"], 200);
+    } catch (Exception $e) {
+      return HttpJson::Json($res, $e->getMessage(), $e->getCode());
     }
   }
 
-  #[Route("/api/manga/{id}", "GET", "manga.find")]
-  function findById(Request $req) {
-    $id = $req->only(["id"])["id"];
+  function findById(Request $req, Response $res, $args)
+  {
+    $id = $args["id"];
     $manga = $this->manga->findMangaById($id);
 
-    $arr = [
-      "id" => $manga->getId(),
-      "title" => $manga->getTitle(),
-      "logo" => $manga->getLogo(),
-      "author" => $manga->getAuthor()
-    ];
+    if ($manga) {
+      
+      $arr = [
+        "id" => $manga->getId(),
+        "title" => $manga->getTitle(),
+        "logo" => $manga->getLogo(),
+        "author" => $manga->getAuthor()
+      ];
 
-    if($manga) {
-      return HttpJson::Json(MC::$msg["READ"], 200,  $arr);
+      return HttpJson::Json($res, MC::$msg["READ"], 200,  $arr);
     }
-    HttpJson::Json(MC::$errors["NOT_FOUND"], 404);
+
+
+    return HttpJson::Json($res, MC::$errors["NOT_FOUND"], 404);
   }
 }

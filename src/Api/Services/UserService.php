@@ -13,7 +13,11 @@ class UserService {
     $this->userRepo = $userRepo;
   }
 
-  function createUser(string $username, string $password) {
+  function createUser($username, $password) {
+    if(is_null($username) || is_null($password)) {
+      throw new Exception("body is wrong", 400);
+    }
+
     $user = $this->userRepo->findUserByUsername($username);
 
     if($user) {

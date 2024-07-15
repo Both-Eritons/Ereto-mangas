@@ -4,11 +4,12 @@ namespace Ereto\Api\Controllers;
 
 use Ereto\Api\Repositories\UserRepository;
 use Ereto\Api\Services\UserService;
-use Ereto\Constants\UserConstant;
+use Ereto\Constants\UserConstant as UC;
 use Ereto\Utils\HttpJson;
 use Exception;
-use MareaTurbo\Route;
-use MareaTurbo\Request;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
 
 class UserController{
 
@@ -23,28 +24,23 @@ class UserController{
 
   }
 
-  #[Route("/api/user/register/{user}/{pass}", "POST", "route.createUser")]
-  function createUser(Request $request) {
-    $user = array(
-      "username" => $request->only(["user"])["user"],
-      "password" => $request->only(["pass"])["pass"]
-    );
+  function createUser(Request $req, Response $res): Response {
+    $json = $req->getBody();
+    $data = json_decode($json, 1);
 
     try{
-
-      $this->user->createUser($user["username"],$user["password"]);
-      return HttpJson::Json(UserConstant::$msg["CREATED"], 202);
+      $this->user->createUser($data["user"],$data["pass"]);
+      return HttpJson::Json($res, UC::$msg["CREATED"], 202);
 
     } catch(Exception $e) {
 
-      return HttpJson::Json($e->getMessage(), $e->getCode());
+      return HttpJson::Json($res, $e->getMessage(), $e->getCode());
 
     }
   }
 
-  #[Route("/api/user/{id}","GET", "route.findUser")]
-  function FindUser(Request $request) {
-    $id = $request->only(["id"])["id"];
+  function findUser(Request $req, Response $res, array $args): Response {
+    $id = $args["id"];
     $user = $this->user->UserExist($id);
 
     if($user) {
@@ -56,9 +52,9 @@ class UserController{
         "logo" => $user->getLogo()
       ];
 
-      return HttpJson::Json(UserConstant::$msg["READ"], 200, $arr);
+      return HttpJson::Json($res, UC::$msg["READ"], 200, $arr);
     }
 
-    return HttpJson::Json(UserConstant::$msg["NOT_FOUND"], 404);
+    return HttpJson::Json($res, UC::$msg["NOT_FOUND"], 404);
   }
 }

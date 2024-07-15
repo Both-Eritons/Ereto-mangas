@@ -3,3 +3,4 @@
 /router.log
 /vendor/
 /src/test-routes
+/_cdn/logs/*.logs
