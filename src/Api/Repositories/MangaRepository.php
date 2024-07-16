@@ -63,4 +63,20 @@ class MangaRepository{
 
   }
 
+  function searchManga($title) {
+    $q = "SELECT * FROM ".$this->table." WHERE title LIKE '%:title%'";
+
+    $stmt = $this->sql->prepare($q);
+    $stmt->bindParam(":title", $title);
+    $stmt->execute();
+
+    $row = $stmt->fetchAll();
+
+    if($row) {
+      return $row;
+    }
+
+    return null;
+  }
+
 }
