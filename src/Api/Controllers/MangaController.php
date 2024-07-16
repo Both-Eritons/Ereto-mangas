@@ -40,7 +40,7 @@ class MangaController
     $manga = $this->manga->findMangaById($id);
 
     if ($manga) {
-      
+
       $arr = [
         "id" => $manga->getId(),
         "title" => $manga->getTitle(),
@@ -53,5 +53,17 @@ class MangaController
 
 
     return HttpJson::Json($res, MC::$errors["NOT_FOUND"], 404);
+  }
+
+  function searchManga(Request $req, Response $res, $args)
+  {
+    $title = $req->getQueryParams()["s"];
+
+    try {
+      $manga = $this->manga->searchManga($title);
+      return HttpJson::Json($res, MC::$msg["READ"], 200, $manga);
+    } catch (Exception $e) {
+      return HttpJson::Json($res, $e->getMessage(), $e->getCode());
+    }
   }
 }

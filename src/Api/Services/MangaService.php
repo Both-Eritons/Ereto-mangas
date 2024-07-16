@@ -37,4 +37,18 @@ class MangaService {
     return $this->repo->findMangaByTitle($title);
   }
 
+  function searchManga($title) {
+    if(is_null($title)) {
+      throw new Exception(Msg::$errors["NOT_FOUND"], 404);
+    }
+
+    $re = $this->repo->searchManga($title);
+
+    if(is_null($re)) {
+      throw new Exception(Msg::$errors["NOT_FOUND"], 404);
+    }
+
+    return $re;
+  }
+
 }

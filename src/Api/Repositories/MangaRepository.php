@@ -64,10 +64,11 @@ class MangaRepository{
   }
 
   function searchManga($title) {
-    $q = "SELECT * FROM ".$this->table." WHERE title LIKE '%:title%'";
+    $q = "SELECT * FROM ".$this->table." WHERE title LIKE :title";
 
+    $title = "%".$title."%";
     $stmt = $this->sql->prepare($q);
-    $stmt->bindParam(":title", $title);
+    $stmt->bindParam(":title", $title, \PDO::PARAM_STR);
     $stmt->execute();
 
     $row = $stmt->fetchAll();
