@@ -9,7 +9,7 @@ use Ereto\Constants\UserConstant as UC;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
-class UserCreateTest extends TestCase
+class CreateUserTest extends TestCase
 {
   private $userService, $userRepositoryMock;
 

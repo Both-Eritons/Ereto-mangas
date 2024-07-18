@@ -18,7 +18,7 @@ class MangaService {
     $mangaFound = $this->findMangaByTitle($title);
 
     if($mangaFound) {
-      throw new Exception(Msg::$msg["READ"], 400);      
+      throw new Exception(Msg::$msg["READ"], 409);      
     }
 
     if(strlen($title) < 3) {
