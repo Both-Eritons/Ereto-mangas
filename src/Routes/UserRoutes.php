@@ -20,5 +20,9 @@ class UserRoutes
     $app->post("/user/create", function ($req, $res) {
       return $this->user->createUser($req, $res);
     });
+
+    $app->get("/user/profile", function($req, $res, $args) {
+    
+    });
   }
 }
