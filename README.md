@@ -1,0 +1,9 @@
+# Ereto
+## Routes
+> user
+- /user/{id}
+- /user/create
+> mangas
+- /manga/{id}
+- /manga/search?s={id}
+- /manga/create

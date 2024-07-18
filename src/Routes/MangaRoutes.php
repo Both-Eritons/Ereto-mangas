@@ -17,7 +17,7 @@ class MangaRoutes
       return $this->manga->findById($req, $res, $args);
     });
 
-    $app->get("/mangas", function ($req, $res, $args) {
+    $app->get("/search", function ($req, $res, $args) {
       return $this->manga->searchManga($req, $res, $args);
     });
 

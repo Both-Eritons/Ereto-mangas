@@ -5,14 +5,15 @@ namespace Ereto\Constants;
 class MangaConstant
 {
   static $msg = [
-    "CREATED" => "Manga Criado",
-    "READ" => "Manga Encontrado",
-    "UPDATE" => "Manga Atualizado",
-    "DELETED" => "Manga Deletado",
+    "CREATED" => "Manga Created",
+    "READ" => "Manga Found",
+    "UPDATE" => "Manga Updated",
+    "DELETED" => "Manga Deleted",
   ];
   static $errors = [
-    "NOT_FOUND" => "Manga Não Encontrado",
-    "BLANK_TITLE" => "O Titulo nao pode ser em branco!",
-    "MIN_TITLE" => "o Titulo é muito curto"
+    "NOT_FOUND" => "Manga Not Found",
+    "BLANK_TITLE" => "The Title cannot be blank",
+    "MIN_TITLE" => "The Title is small",
+    "EXISTS" => "Manga already exists"
   ];
 }

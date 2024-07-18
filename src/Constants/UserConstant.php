@@ -5,10 +5,10 @@ namespace Ereto\Constants;
 final class UserConstant
 {
   static $msg = [
-    "CREATED" => "Usuario Criado",
-    "READ" => "Usuario Encontrado",
-    "UPDATE" => "Usuario Atualizado",
-    "DELETED" => "Usuario Deletado",
-    "NOT_FOUND" => "Usuario Desconhecido"
+    "CREATED" => "User Created",
+    "READ" => "User Found",
+    "UPDATE" => "User Updated",
+    "DELETED" => "User Deleted",
+    "NOT_FOUND" => "User Not Found"
   ];
 }
