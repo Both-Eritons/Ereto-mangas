@@ -43,4 +43,16 @@ class UserService {
     return $this->userRepo->findUser($id);
   }
 
+  function userProfile($id): ? UserModel {
+    $user = $this->UserExist($id);
+
+    if(!$user) {
+      throw new Exception(UC::$errors["NOT_FOUND"], 404);
+    }
+
+    return new UserModel(
+      $user->getUserId(), 
+      $user->getUsername(),
+    $user->getLogo(), "");
+  }
 }

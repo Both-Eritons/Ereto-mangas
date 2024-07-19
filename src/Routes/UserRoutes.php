@@ -21,8 +21,8 @@ class UserRoutes
       return $this->user->createUser($req, $res);
     });
 
-    $app->get("/user/profile", function($req, $res, $args) {
-    
+    $app->get("/user/profile/{id}", function($req, $res, $args) {
+      return $this->user->userProfile($req, $res, $args); 
     });
   }
 }

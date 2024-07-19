@@ -3,6 +3,7 @@
 > user
 - /user/{id}
 - /user/create
+- /user/profile/{1}
 > mangas
 - /manga/{id}
 - /manga/search?s={id}
