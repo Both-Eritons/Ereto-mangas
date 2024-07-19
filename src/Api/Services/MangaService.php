@@ -9,14 +9,13 @@ use Exception;
 
 class MangaService {
 
-  private $repo;
+  private $repo, $arq;
   function __construct(MangaRepository $repo) {
     $this->repo = $repo;
   }
 
   function createManga($title): ?MangaModel {
     $mangaFound = $this->findMangaByTitle($title);
-
     if($mangaFound) {
       throw new Exception(Msg::$msg["READ"], 409);      
     }
@@ -26,11 +25,14 @@ class MangaService {
     }
 
     $mangaM = new MangaModel(null, $title);
-    return $this->repo->createManga($mangaM);
+
+    $manga = $this->repo->createManga($mangaM);
+
+    return $manga;
   }
 
   function findMangaById($id): ? MangaModel {
-    return $this->repo->findManga($id);
+    return $this->repo->findManga((int) $id);
   }
 
   function findMangaByTitle($title): ? MangaModel {
@@ -51,4 +53,5 @@ class MangaService {
     return $re;
   }
 
+  
 }

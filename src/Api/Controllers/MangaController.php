@@ -26,7 +26,7 @@ class MangaController
     $title = $req->getQueryParams()["title"];
 
     try {
-
+      
       $this->manga->createManga($title);
       return HttpJson::Json($res, MC::$msg["CREATED"], 200);
     } catch (Exception $e) {
