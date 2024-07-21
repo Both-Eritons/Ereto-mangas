@@ -53,5 +53,24 @@ class MangaService {
     return $re;
   }
 
+  function deleteMangaByTitle($title) {
+    if(!$title) {
+      throw new Exception(Msg::$errors["BLANK_TITLE"], 400);
+    }
+
+    $manga = $this->findMangaByTitle($title);
+
+    if(!$manga) {
+      throw new Exception(Msg::$errors["NOT_FOUND"], 404);
+    }
+
+    $manga = $this->repo->deleteMangaByTitle($title);
+
+    if(is_null($manga)) {
+      throw new Exception(Msg::$errors["DELETE"], 400);
+    }
+
+    return $manga;
+  }
   
 }

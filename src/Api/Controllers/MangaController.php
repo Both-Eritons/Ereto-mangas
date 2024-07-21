@@ -26,7 +26,7 @@ class MangaController
     $title = $req->getQueryParams()["title"];
 
     try {
-      
+
       $this->manga->createManga($title);
       return HttpJson::Json($res, MC::$msg["CREATED"], 200);
     } catch (Exception $e) {
@@ -61,6 +61,17 @@ class MangaController
 
     try {
       $manga = $this->manga->searchManga($title);
+      return HttpJson::Json($res, MC::$msg["READ"], 200, $manga);
+    } catch (Exception $e) {
+      return HttpJson::Json($res, $e->getMessage(), $e->getCode());
+    }
+  }
+
+  function deleteMangaByTitle(Request $req, Response $res, array $args)
+  {
+
+    try {
+      $manga = $this->manga->deleteMangaByTitle($args["title"]);
       return HttpJson::Json($res, MC::$msg["READ"], 200, $manga);
     } catch (Exception $e) {
       return HttpJson::Json($res, $e->getMessage(), $e->getCode());

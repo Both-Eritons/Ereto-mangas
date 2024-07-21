@@ -26,6 +26,8 @@ class MangaRoutes
       return $this->manga->searchManga($req, $res, $args);
     });
 
-    //$app->get("/manga/delete/{id}", function ($req, $res, $args) {});
+    $app->get("/manga/delete/{title}", function ($req, $res, $args) {
+      return $this->manga->deleteMangaByTitle($req, $res, $args);
+    });
   }
 }
