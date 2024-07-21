@@ -39,7 +39,7 @@ class MangaService {
     return $this->repo->findMangaByTitle($title);
   }
 
-  function searchManga($title) {
+  function searchManga($title): ? Array {
     if(is_null($title)) {
       throw new Exception(Msg::$errors["NOT_FOUND"], 404);
     }
@@ -53,7 +53,7 @@ class MangaService {
     return $re;
   }
 
-  function deleteMangaByTitle($title) {
+  function deleteMangaByTitle($title): ? MangaModel {
     if(!$title) {
       throw new Exception(Msg::$errors["BLANK_TITLE"], 400);
     }
